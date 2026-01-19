@@ -51,7 +51,7 @@ instagram-chat-analyzer/
 2. Make sure the file is named `message_1.json`
 3. Run the script:
 
-```bash
+
 python src/main.py
 
 
@@ -86,3 +86,34 @@ This project is built as a learning-focused data analysis exercise:
 - Visualization (matplotlib)
 - Sentiment analysis
 - ML-based insights
+
+
+
+## 📋 Quick Updates Summary for Version 2:
+
+**New features added:**
+1. **Multi-chat analysis** - Processes entire `inbox/` directory
+2. **Enhanced media tracking** - Photos, videos, audio, reels separately
+3. **Better project structure** - Organized for scalability
+4. **Improved word analysis** - More accurate frequency counting
+5. **Most used words by each user** - Find the top 10 most used words by each user
+
+
+# Instagram Chat Analyzer - Version 2
+Version 2 introduces merging multiple chat files and analyzing the top 10 most used words per participant.
+
+## Features (Version 2)
+- **Merge multiple JSON chat files** from a conversation folder into a single dataset.
+- **Top 10 words per participant**: Identify the most frequently used words in the conversation.
+- **Media behavior summary**: Number of photos, videos, audio, and attachments sent by each participant.
+
+## Project Structure
+instagram_chat_analyzer/
+├── data/
+│   └── inbox/
+│       ├── chat_folder_1/     # Instagram chat export folders
+│       └── chat_folder_2/     # Each folder contains message_1.json, message_2.json, etc.
+├── src/
+│   └── main.py                # Main analysis script
+├── outputs/                   # Future graphs / reports
+└── README.md
