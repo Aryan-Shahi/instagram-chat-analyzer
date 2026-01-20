@@ -7,7 +7,7 @@ import os
 #     data = json.load(file)
  
  
-CHAT_FOLDER = "../data/inbox/chat_folder_sahil"
+CHAT_FOLDER = "../data/inbox/chat_folder_ruu"
 all_messages = []   
 
 for filename in os.listdir(CHAT_FOLDER):
@@ -314,7 +314,7 @@ for sender, words_dict in clean_word_frequency.items():
         reverse=True
     )
 
-    for word, count in sorted_words[:10]:
+    for word, count in sorted_words[:30]:
         print(f"  {word} -> {count}")
 
 
@@ -357,3 +357,76 @@ for sender, stats in media_stats.items():
     print(f"\n{sender}:")
     for k,v in stats.items():
         print(f"  {k} -> {v}")
+        
+        # THIS IS WRONG
+# # Reaction analysis    
+# reaction_stats = {}
+
+# for message in messages:
+#     sender = message.get("sender_name")
+#     text = message.get("content", "".lower())
+    
+#     if not sender:
+#         continue
+    
+#     if sender not in reaction_stats:
+#         reaction_stats[sender] = {
+#             "total_reactions": 0,
+#             "reacted_to_message": 0,
+#             "reacted_to_media": 0
+#         }
+        
+#     if "reacted" in text:
+#         reaction_stats[sender]["total_reactions"]+=1
+        
+#         if "attachment"  in text or "photo" in text or "video" in text or "reel" in text:
+#             reaction_stats[sender]["reacted_to_media"]+= 1
+#         else:
+#             reaction_stats[sender]["reacted_to_message"] += 1
+            
+# print("\nReaction behavior per person")
+
+# for sender, stats in reaction_stats.items():
+#     print(f"\n{sender}:")
+#     for k, v in stats.items():
+#         print(f"  {k}-> {v}")
+
+
+
+reaction_sent = {}
+reaction_received = {}
+
+for message in messages:
+    sender = message.get("sender_name")
+
+    if sender and sender not in reaction_received:
+        reaction_received[sender] = 0
+
+    reactions = message.get("reactions")
+
+    if not reactions:
+        continue
+
+    for reaction in reactions:
+        actor = reaction.get("actor")
+
+        if not actor:
+            continue
+
+        if actor not in reaction_sent:
+            reaction_sent[actor] = 0
+
+        reaction_sent[actor] += 1
+
+        if sender:
+            reaction_received[sender] += 1
+
+print("\nReaction analysis:")
+
+print("\nReactions SENT:")
+for person, count in reaction_sent.items():
+    print(f"  {person} -> {count}")
+
+print("\nReactions RECEIVED:")
+for person, count in reaction_received.items():
+    print(f"  {person} -> {count}")
